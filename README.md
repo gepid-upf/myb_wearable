@@ -1,6 +1,6 @@
 # Move Your Body
 
-Code provided in this repository gets the raw data from MPU-6050 and MAX30100, calculates a step counter and heart rate, and stores it in the ESP-32 SPIFFS to be send via bluetooth to the MYB App.
+Code provided in this repository gets the raw data from MPU-6050 and SEN0203, calculates a step counter and heart rate, and stores it in the ESP-32 SPIFFS to be send via bluetooth to the MYB App. Also, comminicates with an Oled display via i2c to show in real time the data gathered, switching with a clock by using touch sensitive pins.
 
 ## Table of Contents
 
@@ -8,7 +8,7 @@ Code provided in this repository gets the raw data from MPU-6050 and MAX30100, c
   - [ESP 32](#esp-32)
   - [ESP-IDF](#esp-idf)
   - [MPU-6050](#mpu-6050)
-  - [MAX30100](#max30100)
+  - [SEN0203](#sen0203)
 - [Quick Start](#quick-start)
   - [Connect](#connect)
   - [Configuration and Flash](#configuration-and-flash)
@@ -26,7 +26,8 @@ To make this code work, you need the following components:
 * [ESP 32](https://espressif.com/en/products/hardware/esp32/overview) module.
 * [ESP-IDF](https://github.com/espressif/esp-idf).
 * [MPU-6050](https://www.invensense.com/products/motion-tracking/6-axis/mpu-6050/) module.
-* [MAX30100](https://www.maximintegrated.com/en/products/sensors/MAX30100.html) module.
+* [SEN0203](https://wiki.dfrobot.com/Heart_Rate_Sensor_SKU__SEN0203) module.
+* [OLED_SSD1306](https://cdn-shop.adafruit.com/datasheets/SSD1306.pdf) module.
 
 ### ESP 32
 
@@ -42,9 +43,15 @@ This example has been tested with a MPU-6050.
 
 The MPU-6000 should work aswell.
 
-### MAX30100
+### SEN0203
 
-Any MAX30100 module should work.
+By DFRobot, the great differential is that this sensor can read heart rate data from wrist, while most of the more well known devices just read precisely from fingers.
+
+Also, it can be choosed both digital or analog connection by a switch, very easy to set up.
+
+### OLED_SSD1306
+
+Tested with the ssd1306 64x48 0.66", but with some fast adjustments in the code, it can be work with any other i2c based oled display.
 
 ## Quick Start
 
@@ -93,15 +100,6 @@ Partition Table: Custom Partition Table CSV (choose the partitions.csv file)
 
 ## How it Works
 
-### Software
-
-The software has 3 libraries, all located in the components folder:
-* [esp32_i2c_rw.c](https://github.com/gabrielbvicari/esp32-i2c_rw/blob/f532d6a554dc2f2daa3954b597072ecb48354688/esp32_i2c_rw.c) and [include/esp32_i2c_rw.h](https://github.com/gabrielbvicari/esp32-i2c_rw/blob/f532d6a554dc2f2daa3954b597072ecb48354688/include/esp32_i2c_rw/esp32_i2c_rw.h) - implementation of the I2C protocol used by the [MPU-6050](https://github.com/gabrielbvicari/esp32-mpu6050) library.
-
-* [mpu6050.c](https://github.com/gabrielbvicari/esp32-mpu6050/blob/fa99df4a75917e85b31b20e94344acca3d00d556/mpu6050.c), [include/mpu6050.h](https://github.com/gabrielbvicari/esp32-mpu6050/blob/fa99df4a75917e85b31b20e94344acca3d00d556/include/mpu6050/mpu6050.h) and [include/mpu6050_registers.h](https://github.com/gabrielbvicari/esp32-mpu6050/blob/fa99df4a75917e85b31b20e94344acca3d00d556/include/mpu6050/mpu6050_registers.h) - definition of the registers of the MPU-6050, setters/getters functions for the registers aswell as functions of calibration and self-test.
-
-* [max30100.c](https://github.com/aedalzotto/esp32-max30100/blob/2585aa70b25955ecb60d2d8fb26c5cbb76526d65/max30100.c), [include/max30100.h](https://github.com/aedalzotto/esp32-max30100/blob/2585aa70b25955ecb60d2d8fb26c5cbb76526d65/include/max30100/max30100.h) and [include/registers.h](https://github.com/aedalzotto/esp32-max30100/blob/2585aa70b25955ecb60d2d8fb26c5cbb76526d65/include/max30100/registers.h) - definition of the registers of the MAX3010, setters/getters functions for the registers aswell as implementations of filters (Butterworth, DC Removal and Moving Average).
-
 * component.mk - files used by C `make` command to access component during compilation.
 
 Application is executed from [main.c](main/main.c) file located in main folder.
@@ -109,7 +107,9 @@ The main file has a step counter function, as well as log functions and routines
 
 ## Next Steps
 
-Add the GATT Bluetooth functionality to send the data stored in the SPIFFS to the MYB app.
+Adjust the bluetooth data array to be sent to the mobile app.
+Develop PCB and project design for the prototype.
+Testing and validation.
 
 ## License
 
@@ -120,4 +120,5 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 This application is using code based on:
 
 * MPU-6050 implementation for Arduino by [Jeff Rowberg](https://www.i2cdevlib.com).
-* MAX30100 implementation for Arduino by [Raivis Strogonovs](https://morf.lv/).
+* SEN0203 implementation for Arduino by [DFRobot](https://github.com/DFRobot/DFRobot_Heartrate).
+* OLED Display implementation for multiple devices by[olikraus](https://github.com/olikraus/u8g2).
