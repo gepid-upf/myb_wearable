@@ -60,20 +60,13 @@ If you have your components ready, follow this section to [connect](#connect) th
 
 ### Connect
 
-The pins used in this project to connect the ESP 32 to the MPU-6050 and MAX30100 are shown in the table below. The pinout can be adjusted in the software.
-
-| Interface | MPU-6050 Pin | MAX30100 Pin | ESP 32 DevKitC Pin Mapping |
-| :--- | :---: | :---: | :---: |
-| I2C Serial Clock | SCL | SCL | IO25 |
-| I2C Serial Data | SDA | SDA | IO26 |
-| Power Supply 3.3V | VCC | VIN | 3V3 |
-| Ground | GND | GND | GND |
+The pins used in this project to connect the ESP 32 to the MPU-6050, SEN0203, and SSD1306 are shown in the image below.
 
 Notes:
 
 If the sensors are not communicating with the ESP 32, consider adding 10kΩ pull-up resistors to the SCL and SDA lines.
 
-![alt text](images/wiring.png "Wiring for ESP 32 DevKitC.")
+![alt text](images/fullschem.png "Wiring for ESP 32 DevKitC.")
 
 If you're using ESP 32 on Windows and is having the [ESP 32 Reset to Bootloader](https://github.com/espressif/esptool/issues/136) issue, add a 2.2uF capacitor conencted between GND and EN pins of ESP 32 module.
 
