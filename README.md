@@ -9,7 +9,7 @@ Code provided in this repository gets the raw data from MPU-6050 and SEN0203, ca
   - [ESP-IDF](#esp-idf)
   - [MPU-6050](#mpu-6050)
   - [SEN0203](#sen0203)
-  - [OLED_SSD1306](#OledDisplay)
+  - [OLED_SSD1306](#oled_ssd1306)
 - [Quick Start](#quick-start)
   - [Connect](#connect)
   - [Configuration and Flash](#configuration-and-flash)
