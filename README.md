@@ -122,4 +122,8 @@ This application is using code based on:
 
 * MPU-6050 implementation for Arduino by [Jeff Rowberg](https://www.i2cdevlib.com).
 * SEN0203 implementation for Arduino by [DFRobot](https://github.com/DFRobot/DFRobot_Heartrate).
-* OLED Display implementation for multiple devices by[olikraus](https://github.com/olikraus/u8g2).
+* OLED Display implementation for multiple devices by [olikraus](https://github.com/olikraus/u8g2).
+
+Also, this project is an update of myb (Move Your Body), made int the past year by our group (Gepid).
+You can find the first version of the project in here:
+* myb by [gabrielbvicari](https://github.com/gepid-upf/myb)
